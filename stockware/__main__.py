@@ -1,8 +1,11 @@
+from responseData import graphing
 from GUI import Window_1, Window_2
 import sys
 from PyQt5.QtWidgets import QApplication
 
 def main():
+    grapher = graphing()
+    graphing.lineGraph()
     print("welcome")
 
 if __name__ == "__main__":
