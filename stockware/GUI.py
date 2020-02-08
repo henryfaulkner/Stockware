@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QPushButton, QAc
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot, QSize
 from responseData import graphing
+from timeSeriesPlot import timeSeriesPlot
+from SMAPlot import SMAPlot
 
 class Window_1(QMainWindow):
 
@@ -23,25 +25,30 @@ class Window_1(QMainWindow):
         self.textbox.move(20,20)
         self.textbox.resize(280,40)
 
+        self.textStuff = QLineEdit(self)
+        self.textStuff.move(20,60)
+        self.textStuff.resize(280,20)
+
         self.button1 = QPushButton('Analyze' ,self)
         self.button1.move(20,80)
         self.button1.resize(150,30)
 
         #connect button to function on_click
         self.button1.clicked.connect(self.on_click)
-        self.dialog = Window_2()
         self.show()
 
         
     def on_click(self):
-        self.textboxValue = self.textbox.text()
+        self.textboxValue = self.textStuff.text()
+        self.dialog = Window_2(self.textboxValue)
         self.dialog.show()
 
 
 class Window_2(QMainWindow):
 
-    def __init__(self):
+    def __init__(self, stockValue):
         super().__init__()
+        self.stockValue = stockValue
         self.title = "Another WindoWwww"
         self.left = 150
         self.top = 150
@@ -53,20 +60,20 @@ class Window_2(QMainWindow):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
 
-        self.textbox = QLabel('Graphs', self)
+        self.textbox = QLabel('Graphs for ' + self.stockValue, self)
         self.textbox.move(20,20)
         self.textbox.resize(150,30)
 
-        self.graphButton1 = QPushButton('Graph 1', self)
+        self.graphButton1 = QPushButton('Line Graph', self)
         self.graphButton1.resize(150,30)
         self.graphButton1.move(20,60)
 
-        self.graphButton2 = QPushButton('Graph 2', self)
+        self.graphButton2 = QPushButton('Time Series Plot', self)
         self.graphButton2.resize(150,30)
         self.graphButton2.move(20,90)
 
 
-        self.graphButton3 = QPushButton('Graph 3', self)
+        self.graphButton3 = QPushButton('SMA Plot', self)
         self.graphButton3.resize(150,30)
         self.graphButton3.move(20,120)
 
@@ -80,10 +87,12 @@ class Window_2(QMainWindow):
 
     def graphButton_2(self):
         print('button2')
+        timeSeriesPlot.timeSeriesPlot(self.stockValue)
+        
 
     def graphButton_3(self):
         print('button3')
-        
+        SMAPlot.SMAPlot(self.stockValue)
         
         
 

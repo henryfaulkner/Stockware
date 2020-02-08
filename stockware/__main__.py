@@ -1,13 +1,12 @@
 from responseData import graphing
 from requestData import requestData
+from timeSeriesPlot import timeSeriesPlot
+from SMAPlot import SMAPlot
 from GUI import Window_1, Window_2
 import sys
 from PyQt5.QtWidgets import QApplication
 
 def main():
-    #requestData.timeSeries('AAPL')
-    requestData.weekly_OLH_Data('AAPL')
-    graphing.lineGraph()
     print("welcome")
 
 if __name__ == "__main__":
