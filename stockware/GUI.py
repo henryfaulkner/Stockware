@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QPushButton, QAction, QLineEdit, QMessageBox, QLabel, QCheckBox
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot, QSize
+from requestData import requestData
 from responseData import graphing
 from timeSeriesPlot import timeSeriesPlot
 from SMAPlot import SMAPlot
@@ -83,7 +84,8 @@ class Window_2(QMainWindow):
 
     def graphButton_1(self):
         print('button1')
-        graphing.lineGraph()
+        daysList, openList,highList, lowList, closeList = requestData.weekly_OLH_Data(self.stockValue)
+        graphing.past_week_open_low_high(self.stockValue, daysList, openList, highList, lowList, closeList)
 
     def graphButton_2(self):
         print('button2')

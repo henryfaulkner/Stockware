@@ -12,6 +12,7 @@ class requestData:
         reverseWeekList = [] # holds json of previous 7 days in decrementing order 
         stock, meta = ts.get_daily(symbol=stockName)
         y = 0
+        daysList = []
         openList = []
         lowList = []
         highList = []
@@ -23,12 +24,13 @@ class requestData:
                 i += 1
                 day = date.today() - timedelta(days=i)
             strDay = day.strftime('%Y-%m-%d')
-            openList = stock[strDay]['1. open']
-            highList = stock[strDay]['2. high']
-            lowList = stock[strDay]['3. low']
-            closeList = stock[strDay]['4. close']
+            daysList.append(strDay)
+            openList.append(stock[strDay]['1. open'])
+            highList.append(stock[strDay]['2. high'])
+            lowList.append(stock[strDay]['3. low'])
+            closeList.append(stock[strDay]['4. close'])
 
-        return openList, lowList, highList, closeList
+        return daysList[::-1], openList[::-1], highList[::-1], lowList[::-1], closeList[::-1]
 
     def timeSeries(stockName):
         key = 'YHFRABURSHV75JOI'
