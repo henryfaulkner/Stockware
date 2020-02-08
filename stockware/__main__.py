@@ -5,7 +5,8 @@ import sys
 from PyQt5.QtWidgets import QApplication
 
 def main():
-    requestData.timeSeries('AAPL')
+    #requestData.timeSeries('AAPL')
+    requestData.weekly_OLH_Data('AAPL')
     graphing.lineGraph()
     print("welcome")
 
