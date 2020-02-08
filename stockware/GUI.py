@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QPushButton, QAction, QLineEdit, QMessageBox, QLabel, QCheckBox
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot, QSize
+from responseData import graphing
 
 class Window_1(QMainWindow):
 
@@ -75,6 +76,7 @@ class Window_2(QMainWindow):
 
     def graphButton_1(self):
         print('button1')
+        graphing.lineGraph()
 
     def graphButton_2(self):
         print('button2')
